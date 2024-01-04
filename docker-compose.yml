@@ -1,0 +1,29 @@
+version: "3.4"
+
+services:
+  mysql:
+    image: mysql:8.0.30
+    container_name: local-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "1001:3306"
+
+  mongo:
+    image: mongo
+    container_name: local-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpass
+    ports:
+      - "1002:27017"
+
+
+networks:
+  default:
+    external:
+      name: local-network
